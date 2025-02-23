@@ -1,5 +1,5 @@
-import { TIME_FORMAT } from "./domain/timer/constants.js"
-import Timer from "./domain/timer/timer-entity.js"
+import { TIME_FORMAT } from "./domain/constants.js";
+import Timer from "./domain/timer-entity.js";
 
 const MAX_MINUTES = 59
 const MIN_MINUTES = 0
