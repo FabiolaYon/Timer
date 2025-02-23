@@ -4,14 +4,19 @@
     "main": "main.js",
     "scripts": {
         "start": "webpack serve --open",
-        "build": "webpack"
+        "build": "webpack",
+        "test": "jest"
     },
     "author": "",
     "license": "ISC",
     "keywords": [],
     "description": "",
     "devDependencies": {
+        "@babel/core": "^7.26.9",
+        "@babel/preset-env": "^7.26.9",
+        "babel-jest": "^29.7.0",
         "css-loader": "^7.1.2",
+        "jest": "^29.7.0",
         "mini-css-extract-plugin": "^2.9.2",
         "sass": "^1.85.0",
         "sass-loader": "^16.0.5",
