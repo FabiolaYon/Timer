@@ -1,5 +1,11 @@
-# Node
-node_modules
-package-lock.json
+# Node modules
+node_modules/
 
-# IDE
+# Build
+dist/
+
+# Coverage (Jest)
+coverage/
+
+# Package lock
+package-lock.json
