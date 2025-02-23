@@ -1,6 +1,7 @@
 /** Practica2: Timer - Fabiola */
 import { TIME_FORMAT } from "./domain/constants.js";
 import Timer from "./domain/timer-entity.js";
+import './styles.scss';
 
 const MAX_MINUTES = 59;
 const MIN_MINUTES = 0;
