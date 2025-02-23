@@ -1,9 +1,13 @@
 # Práctica final de la 2ª evaluación: Timer
 
 Crea un timer con la siguiente funcionalidad
+
 Un botón de UP que añada minutos al timer (hasta 59)
+
 Un botón de DOWN que reste minutos al timer (hasta 0)
+
 Un botón de START que haga comience el timer (de forma decreciente)
+
 Un botón RESET que coloque el contador al último valor introducido y lo pare.
 
 ## El proyecto tiene que tener:
