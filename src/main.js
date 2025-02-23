@@ -1,65 +1,71 @@
+/** Practica2: Timer - Fabiola */
 import { TIME_FORMAT } from "./domain/constants.js";
 import Timer from "./domain/timer-entity.js";
 
-const MAX_MINUTES = 59
-const MIN_MINUTES = 0
+const MAX_MINUTES = 59;
+const MIN_MINUTES = 0;
 
-let minutes = 0
-let seconds = 10
+let minutes = 0;
+let seconds = 0;
+let timerInterval = null;
+let initialTime = 0;
 
-// TODO: to refactorize
+let myTimer = new Timer(0);
+
+const upButton = document.getElementById("upButton");
+const downButton = document.getElementById("downButton");
+const resetButton = document.getElementById("resetButton");
+const startButton = document.getElementById("startButton");
+
+const minutesText = document.getElementById("minutes");
+const secondsText = document.getElementById("seconds");
+
+const updateDisplay = () => {
+  minutesText.innerHTML = myTimer.getMinutes();
+  secondsText.innerHTML = myTimer.getSeconds();
+};
+
 const addMinute = () => {
-    if (minutes < MAX_MINUTES) {
-        minutes++
-        minutesText.innerHTML = minutes.toLocaleString(...TIME_FORMAT)
-    }
-}
+  if (minutes < MAX_MINUTES) {
+    minutes++;
+    myTimer.remainingTime = minutes * 60 + seconds;
+    updateDisplay();
+  }
+};
 
 const subMinute = () => {
-    if (minutes > MIN_MINUTES) {
-        minutes--
-        minutesText.innerHTML = minutes.toLocaleString(...TIME_FORMAT)
-    }
-}
+  if (minutes > MIN_MINUTES) {
+    minutes--;
+    myTimer.remainingTime = minutes * 60 + seconds;
+    updateDisplay();
+  }
+};
 
 const resetTime = () => {
-    minutes = 0
-    seconds = 0
-    minutesText.innerHTML = minutes.toLocaleString(...TIME_FORMAT)
-    secondsText.innerHTML = seconds.toLocaleString(...TIME_FORMAT)
-}
+  clearInterval(timerInterval);
+  myTimer.remainingTime = initialTime;
+  updateDisplay();
+};
 
-const upButton = document.getElementById('upButton')
-const downButton = document.getElementById('downButton')
-const resetButton = document.getElementById('resetButton')
+const startTimer = () => {
+  if (myTimer.remainingTime <= 0) return;
+  initialTime = myTimer.remainingTime;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    myTimer.remainingTime--;
+    updateDisplay();
 
-const minutesText = document.getElementById('minutes')
-const secondsText = document.getElementById('seconds')
-
-
-upButton.addEventListener('click', addMinute)
-downButton.addEventListener('click', subMinute)
-resetButton.addEventListener('click', resetTime)
-
-
-const startButton = document.getElementById('startButton')
-
-const startTimer = () => setTimeout(tic, 1000)
-
-startButton.addEventListener('click', startTimer)
-
-
-const tic = () => {
-    seconds--
-    secondsText.innerHTML = seconds.toLocaleString(...TIME_FORMAT)
-    console.log(seconds)
-    if (seconds > 0) {
-        startTimer()
-    } else {
-        alert("TIME!!!")
+    if (myTimer.remainingTime <= 0) {
+      clearInterval(timerInterval);
+      alert("TIME!!!");
     }
-}
+  }, 1000);
+};
 
-let myTimer = new Timer(1200)
-console.log('minutes: ', myTimer.getMinutes())
-console.log('seconds: ', myTimer.getSeconds())
+upButton.addEventListener("click", addMinute);
+downButton.addEventListener("click", subMinute);
+resetButton.addEventListener("click", resetTime);
+startButton.addEventListener("click", startTimer);
+
+// Inicializar la pantalla
+updateDisplay();
